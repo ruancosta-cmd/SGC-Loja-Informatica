@@ -4,7 +4,7 @@ Este repositório contém o código-fonte do backend do **SGC (Sistema de Gestã
 
 ---
 
-## 🚀 O que foi implementado na Entrega 2
+##  O que foi implementado na Entrega 2
 
 ### 1. Arquitetura em Camadas (Refatoração)
 O projeto foi totalmente reestruturado seguindo o padrão de mercado para divisão de responsabilidades:
@@ -29,7 +29,7 @@ O projeto foi totalmente reestruturado seguindo o padrão de mercado para divis�
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 - **Java 17**
 - **Spring Boot 3**
 - **Spring Data JPA**
@@ -39,7 +39,7 @@ O projeto foi totalmente reestruturado seguindo o padrão de mercado para divis�
 
 ---
 
-## 🗄️ Estrutura do Banco de Dados (Scripts SQL)
+##  Estrutura do Banco de Dados (Scripts SQL)
 
 O banco de dados utiliza a seguinte estrutura relacional para suporte ao sistema:
 
