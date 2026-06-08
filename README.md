@@ -1,47 +1,53 @@
-# SGC - Sistema de Gestão Comercial (Loja de Informática)
+# 🛒 SGC - Sistema de Gestão Comercial (Loja de Informática)
 
-Este repositório contém o código-fonte do backend do **SGC (Sistema de Gestão Comercial)** desenvolvido para a disciplina de Desenvolvimento de Sistemas. A aplicação consiste em uma API REST robusta construída com o ecossistema Spring.
-
----
-
-##  O que foi implementado na Entrega 2
-
-### 1. Arquitetura em Camadas (Refatoração)
-O projeto foi totalmente reestruturado seguindo o padrão de mercado para divisão de responsabilidades:
-- **Models/Entities:** Mapeamento das tabelas de banco de dados.
-- **Repositories:** Interfaces com Spring Data JPA para comunicação com a base de dados.
-- **Services:** Isolamento total das regras de negócio.
-- **Controllers:** Exposição dos endpoints REST e manipulação de requisições HTTP.
-
-### 2. Segurança e Autenticação com Spring Security & JWT
-- Integração do **Spring Security** com a biblioteca **Java JWT (Auth0)**.
-- Implementação de endpoints públicos para cadastro e login de usuários.
-- Geração de tokens JWT criptografados (HMAC256) com tempo de expiração de 2 horas.
-- Bloqueio nativo de rotas privadas (ex: `/clientes` e `/produtos`) contra acessos não autenticados (**Status 403 Forbidden**).
-
-### 3. Tratamento Global de Exceções
-- Criação de um Handler centralizado com a anotação `@RestControllerAdvice`.
-- Intercepção de falhas de validação e erros de banco de dados para o retorno de payloads JSON limpos e padronizados com os devidos códigos HTTP.
-
-### 4. Padrões de Projeto (Design Patterns)
-- **Data Transfer Object (DTO):** Encapsulamento seguro dos dados de requisições de autenticação.
-- **Repository Pattern:** Abstração completa da camada de persistência.
+Este repositório contém o ecossistema completo do **SGC (Sistema de Gestão Comercial)** desenvolvido para a disciplina de Desenvolvimento de Sistemas. A aplicação foi construída em uma arquitetura de alta coesão e baixo acoplamento, integrando uma API REST robusta em Spring Boot com um Frontend Desktop dinâmico desenvolvido em Java Swing.
 
 ---
 
-##  Tecnologias Utilizadas
-- **Java 17**
-- **Spring Boot 3**
-- **Spring Data JPA**
-- **Spring Security**
-- **Java JWT (Auth0)**
-- **MySQL**
+## 📈 Histórico de Evolução do Projeto
+
+### 📑 Entrega 1: Fundamentos e Base do Sistema
+* **Modelagem Inicial:** Criação e estruturação das entidades fundamentais do negócio (Clientes e Produtos).
+* **Camada de Persistência:** Implementação da comunicação inicial com o banco de dados relacional através do Spring Data JPA.
+* **Operações Básicas (CRUD):** Disponibilização dos primeiros endpoints de cadastro, consulta, atualização e exclusão.
+
+### 🔒 Entrega 2: Refatoração Arquitetural e Segurança
+* **Arquitetura em Camadas:** Divisão estrita de responsabilidades:
+  * **Entities:** Mapeamento das tabelas do banco de dados.
+  * **Repositories:** Interfaces para abstração total da camada de persistência.
+  * **Services:** Isolação e centralização de todas as regras de negócio.
+  * **Controllers:** Exposição dos endpoints REST e manipulação de requisições HTTP.
+* **Segurança com Spring Security & JWT:**
+  * Integração nativa com a biblioteca **Java JWT (Auth0)**.
+  * Implementação de rotas para cadastro e autenticação (Login) de usuários com senhas criptografadas por BCrypt.
+  * Geração de tokens JWT seguros com expiração automática.
+* **Tratamento Global de Exceções:** Centralização de falhas de validação através de `@RestControllerAdvice`, garantindo payloads JSON limpos.
+
+### 🎨 Entrega 3: Interface Gráfica, Regras de Negócio e Relatórios (Fase Final)
+* **Interface Gráfica Desktop (Java Swing):** Construção de telas completas para interação do usuário final consumindo a API localmente através do cliente HTTP nativo do Java:
+  * `LoginView`: Tela de autenticação integrada com a segurança da API.
+  * `PainelPrincipalView`: Dashboard gerencial com abas divididas para vendas e painel de controle.
+* **Regras de Negócio e Controle de Estoque:** Mecanismo transacional integrado que valida a quantidade de produtos disponíveis em estoque antes de autorizar o fechamento de uma venda, efetuando a baixa automatizada na tabela de produtos após o sucesso.
+* **Sistema de Relatórios de Faturamento:** Criação de consultas customizadas (`@Query`) e endpoints específicos para computar o faturamento total acumulado e exibi-lo de forma dinâmica em tempo real no dashboard gráfico.
+* **Compatibilidade Universal:** Remoção e ajuste de dependências externas complexas para garantir que o projeto compile e execute de primeira em qualquer ambiente de correção.
 
 ---
 
-##  Estrutura do Banco de Dados (Scripts SQL)
+## 🛠️ Tecnologias Utilizadas
+* **Java 17**
+* **Spring Boot 3.x**
+* **Spring Data JPA & Hibernate**
+* **Spring Security**
+* **Java JWT (Auth0)**
+* **MySQL** (Persistência de Dados)
+* **Java Swing** (Interface Visual Desktop)
+* **Maven** (Gerenciador de Dependências)
 
-O banco de dados utiliza a seguinte estrutura relacional para suporte ao sistema:
+---
+
+## 🗄️ Estrutura do Banco de Dados (Scripts SQL)
+
+O Hibernate está configurado no modo `update`, o que significa que **todas as tabelas abaixo são geradas de forma automatizada na inicialização**, mas seguem rigorosamente a seguinte estrutura física relacional:
 
 ```sql
 CREATE TABLE usuarios ( 
@@ -85,27 +91,5 @@ CREATE TABLE itens_venda (
     quantidade INT, 
     preco_unitario DECIMAL(10,2), 
     FOREIGN KEY (venda_id) REFERENCES vendas(id), 
-    FOREIGN KEY (produto_id) REFERENCES produtos(id) 
+    FOREIGN KEY (produto_id) REFERENCES produtos(id)
 );
-# Sistema de Gestão Comercial (SGC) - Entrega 3
-
-Este repositório contém a terceira etapa do projeto SGC, que integra o ecossistema Backend em Spring Boot com uma interface gráfica Desktop desenvolvida em Java Swing.
-
-## 🛠️ Tecnologias Utilizadas
-* **Java 17**
-* **Spring Boot 3.x** (Spring Data JPA, Spring Security)
-* **MySQL** (Persistência de dados)
-* **Java Swing** (Interface Gráfica / Frontend Desktop)
-* **Maven** (Gestão de dependências)
-
----
-
-## 🚀 Instruções para Execução do Projeto
-
-Siga os passos abaixo para rodar e testar a aplicação localmente:
-
-### 1. Banco de Dados (MySQL)
-* Certifique-se de que o seu servidor MySQL está ativo.
-* Crie uma base de dados vazia com o nome `sgc`:
-  ```sql
-  CREATE DATABASE sgc;
