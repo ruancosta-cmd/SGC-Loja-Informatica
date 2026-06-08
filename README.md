@@ -87,3 +87,25 @@ CREATE TABLE itens_venda (
     FOREIGN KEY (venda_id) REFERENCES vendas(id), 
     FOREIGN KEY (produto_id) REFERENCES produtos(id) 
 );
+# Sistema de Gestão Comercial (SGC) - Entrega 3
+
+Este repositório contém a terceira etapa do projeto SGC, que integra o ecossistema Backend em Spring Boot com uma interface gráfica Desktop desenvolvida em Java Swing.
+
+## 🛠️ Tecnologias Utilizadas
+* **Java 17**
+* **Spring Boot 3.x** (Spring Data JPA, Spring Security)
+* **MySQL** (Persistência de dados)
+* **Java Swing** (Interface Gráfica / Frontend Desktop)
+* **Maven** (Gestão de dependências)
+
+---
+
+## 🚀 Instruções para Execução do Projeto
+
+Siga os passos abaixo para rodar e testar a aplicação localmente:
+
+### 1. Banco de Dados (MySQL)
+* Certifique-se de que o seu servidor MySQL está ativo.
+* Crie uma base de dados vazia com o nome `sgc`:
+  ```sql
+  CREATE DATABASE sgc;
